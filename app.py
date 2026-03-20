@@ -42,50 +42,57 @@ def add_custom_design(image_file):
 add_custom_design('images/logo.jpg')
 
 # --- ԼՈԳՈ ԵՎ ՎԵՐՆԱԳԻՐ ---
+col_l, col_m, col_r = st.columns([1, 1, 1])
+with col_m:
+    try:
+        st.image("images/logo.jpg", use_container_width=True)
+    except:
+        st.markdown("<h3 style='text-align: center;'>MODERA</h3>", unsafe_allow_html=True)
+
 st.markdown("<h1 style='text-align: center;'>Modera Furniture</h1>", unsafe_allow_html=True)
 st.write("---")
 
 # --- ՄԵՐ ՄԱՍԻՆ ---
 st.header("✨ Մեր մասին")
-st.write("Modera Furniture-ը մասնագիտացված է բարձրակարգ կահույքի նախագծման մեջ։")
+st.markdown("<p style='font-size: 1.1em;'>Modera Furniture-ը մասնագիտացված է բարձրակարգ կահույքի նախագծման և արտադրության մեջ։</p>", unsafe_allow_html=True)
 st.write("---")
 
 # --- ՏԵՍԱԿԱՆԻ ---
 st.header("🛋️ Մեր Տեսականին")
-category = st.selectbox("Ընտրեք բաժինը", ["Աթոռներ", "Բազմոցներ", "Մահճակալներ", "Պահարաններ"])
+category = st.selectbox("Ընտրեք բաժինը", ["--- Ընտրել բաժինը ---", "Աթոռներ", "Բազմոցներ", "Մահճակալներ", "Պահարաններ"])
 
 def display_images(image_list):
-    cols = st.columns(2)
+    cols = st.columns(3)
     for index, img_name in enumerate(image_list):
-        with cols[index % 2]:
+        with cols[index % 3]:
             try:
                 st.image(f"images/{img_name}", use_container_width=True)
             except:
-                st.write("Նկարը չկա")
+                st.caption(f"Նկարը չկա")
 
 if category == "Աթոռներ":
     display_images(["ator.jpg", "ator1.jpg", "ator2.jpg", "ator3.jpg", "ator4.jpg", "ator5.jpg"])
 elif category == "Բազմոցներ":
     display_images(["bazmoc1.jpg", "bazmoc2.jpg"])
 elif category == "Մահճակալներ":
-    display_images(["mahcakal1.jpg"])
+    display_images(["mahcakal1.jpg", "mahcakal2.jpg"])
 elif category == "Պահարաններ":
     display_images(["paharan.jpg", "paharan1.jpg", "paharan2.jpg"])
 
 st.write("---")
 
-# --- ՊԱՏՎԵՐ ---
+# --- ՊԱՏՎԵՐ (Քո հին դիզայնով, բայց աշխատող) ---
 st.header("📅 Պատվիրել")
-
-contact_form = f"""
+contact_form = """
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
-     <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
-     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
-     <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
-     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; cursor: pointer;">Ուղարկել հայտը</button>
+     <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; cursor: pointer; font-weight: bold;">Ուղարկել հայտը</button>
 </form>
 """
 st.markdown(contact_form, unsafe_allow_html=True)
 
 st.write("---")
-st.write("© 2026 Modera Furniture")
+st.markdown("<p style='text-align: center;'>© 2026 Modera Furniture</p>", unsafe_allow_html=True)
