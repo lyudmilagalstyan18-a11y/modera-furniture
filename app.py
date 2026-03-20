@@ -1,6 +1,5 @@
 import streamlit as st
 import base64
-from datetime import date
 
 # 1. ԴԻԶԱՅՆ ԵՎ ԳՈՒՅՆԵՐ
 def add_custom_design(image_file):
@@ -78,18 +77,18 @@ def display_images(image_list):
     for index, img_name in enumerate(image_list):
         with cols[index % 3]:
             try:
-                st.image(f"images/{img_name}", use_container_width=True)
+                st.image(f"images/{{img_name}}", use_container_width=True)
                 m_name = img_name.split('.')[0]
-                st.markdown(f"<div class='model-label'>Մոդել: {m_name}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='model-label'>Մոդել: {{m_name}}</div>", unsafe_allow_html=True)
             except:
-                st.caption(f"Նկարը չկա")
+                st.caption("Նկարը բացակայում է")
 
 if category == "Աթոռներ":
     display_images(["ator.jpg", "ator1.jpg", "ator2.jpg", "ator3.jpg", "ator4.jpg", "ator5.jpg"])
 elif category == "Բազմոցներ":
     display_images(["bazmoc1.jpg", "bazmoc2.jpg"])
 elif category == "Մահճակալներ":
-    display_images(["mahcakal1.jpg", "mahcakal2.jpg"])
+    display_images(["mahcakal1.jpg"])
 elif category == "Պահարաններ":
     display_images(["paharan.jpg", "paharan1.jpg", "paharan2.jpg"])
 
@@ -99,7 +98,7 @@ st.write("---")
 st.header("📅 Պատվիրել")
 st.markdown("<p style='font-size: 0.9em; color: gray;'>Լրացրեք տվյալները, և մենք կկապնվենք Ձեզ հետ:</p>", unsafe_allow_html=True)
 
-contact_form = f"""
+contact_form = """
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
      <input type="hidden" name="_next" value="https://modera-furniture.streamlit.app/">
      <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
