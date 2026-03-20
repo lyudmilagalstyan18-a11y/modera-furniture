@@ -2,7 +2,7 @@ import streamlit as st
 import base64
 from datetime import date
 
-# 1. ԴԻԶԱՅՆ ԵՎ ԳՈՒՅՆԵՐ
+# 1. ՔՈ ՀԻՆ ԴԻԶԱՅՆԸ
 def add_custom_design(image_file):
     try:
         with open(image_file, "rb") as f:
@@ -27,62 +27,40 @@ def add_custom_design(image_file):
     h1, h2, h3, p, label {{
         color: #5d4037 !important;
     }}
-    .stButton>button {{
-        background-color: #5d4037 !important;
-        color: #ffffff !important;
-        border-radius: 10px;
-        border: 2px solid #8d6e63;
-        width: 100%;
-        font-weight: bold;
-        height: 3em;
-        font-size: 1.2em;
-    }}
-    .model-label {{
-        text-align: center;
-        font-weight: bold;
-        color: #8d6e63;
-        margin-top: -10px;
-        margin-bottom: 20px;
-        background: #fdf5e6;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #e2d1c3;
-    }}
     </style>
     """, unsafe_allow_html=True)
 
 add_custom_design('images/logo.jpg')
 
 # --- ԼՈԳՈ ԵՎ ՎԵՐՆԱԳԻՐ ---
-col_l, col_m, col_r = st.columns([1, 1, 1])
-with col_m:
-    try:
-        st.image("images/logo.jpg", use_container_width=True)
-    except:
-        st.markdown("<h3 style='text-align: center;'>MODERA</h3>", unsafe_allow_html=True)
-
 st.markdown("<h1 style='text-align: center;'>Modera Furniture</h1>", unsafe_allow_html=True)
 st.write("---")
 
-# --- ՄԵՐ ՄԱՍԻՆ ---
-st.header("✨ Մեր մասին")
-st.markdown("<p style='font-size: 1.1em;'>Modera Furniture-ը մասնագիտացված է բարձրակարգ կահույքի նախագծման և արտադրության մեջ։</p>", unsafe_allow_html=True)
-st.write("---")
-
-# --- ՏԵՍԱԿԱՆԻ ---
+# --- ՏԵՍԱԿԱՆԻ ԵՎ ՄՈԴԵԼՆԵՐԻ ՍԱՀՄԱՆՈՒՄ ---
 st.header("🛋️ Մեր Տեսականին")
 category = st.selectbox("Ընտրեք բաժինը", ["--- Ընտրել բաժինը ---", "Աթոռներ", "Բազմոցներ", "Մահճակալներ", "Պահարաններ"])
 
+# Այստեղ սահմանում ենք մոդելները, որ սխալ չտա
+all_models = ["--- Ընտրեք մոդելը ---"]
+if category == "Աթոռներ":
+    all_models += ["ator", "ator1", "ator2", "ator3", "ator4", "ator5"]
+elif category == "Բազմոցներ":
+    all_models += ["bazmoc1", "bazmoc2"]
+elif category == "Մահճակալներ":
+    all_models += ["mahcakal1", "mahcakal2"]
+elif category == "Պահարաններ":
+    all_models += ["paharan", "paharan1", "paharan2"]
+
+# Նկարների ցուցադրում
 def display_images(image_list):
     cols = st.columns(3)
     for index, img_name in enumerate(image_list):
         with cols[index % 3]:
             try:
                 st.image(f"images/{img_name}", use_container_width=True)
-                m_name = img_name.split('.')[0]
-                st.markdown(f"<div class='model-label'>Մոդել: {m_name}</div>", unsafe_allow_html=True)
+                st.caption(f"Մոդել: {img_name.split('.')[0]}")
             except:
-                st.caption(f"Նկարը չկա")
+                st.caption("Նկարը չկա")
 
 if category == "Աթոռներ":
     display_images(["ator.jpg", "ator1.jpg", "ator2.jpg", "ator3.jpg", "ator4.jpg", "ator5.jpg"])
@@ -98,27 +76,18 @@ st.write("---")
 # --- ՊԱՏՎԵՐԻ ԲԱԺԻՆ ---
 st.header("📅 Պատվիրել")
 
-# 1. Մոդելի ընտրություն Streamlit-ով
 selected_model = st.selectbox("Ո՞ր մոդելն եք ընտրել", all_models)
-
-# 2. Օրացույց (Թիրախային ամսաթիվ)
 order_date = st.date_input("Ե՞րբ եք ցանկանում ստանալ պատվերը", min_value=date.today())
 
-# 3. Պատվերի ուղարկման ֆորմա
 contact_form = f"""
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
-     <input type="hidden" name="Ընտրված Մոդել" value="{selected_model}">
-     <input type="hidden" name="Ցանկալի Ամսաթիվ" value="{order_date}">
-     
+     <input type="hidden" name="_subject" value="Նոր պատվեր Modera-ից">
+     <input type="hidden" name="Մոդել" value="{selected_model}">
+     <input type="hidden" name="Ամսաթիվ" value="{order_date}">
      <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
      <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
-     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
-     
-     <textarea name="message" placeholder="Ձեր նշումները կամ լրացուցիչ պահանջները..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
-     
-     <button type="submit" style="background-color: #5d4037; color: white; padding: 12px; border: none; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; font-size: 1.1em;">Ուղարկել պատվերը</button>
+     <textarea name="message" placeholder="Լրացուցիչ նշումներ..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; height: 80px;"></textarea>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; cursor: pointer; font-weight: bold;">Ուղարկել պատվերը</button>
 </form>
 """
-
 st.markdown(contact_form, unsafe_allow_html=True)
-
