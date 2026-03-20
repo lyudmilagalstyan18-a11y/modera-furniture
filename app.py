@@ -105,4 +105,12 @@ contact_form = f"""
      
      <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
      <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
-     <input type="email" name="email" placeholder="Ձեր էլ.
+     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     
+     <textarea name="message" placeholder="Լրացուցիչ նշումներ..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
+     
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 12px; border: none; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; font-size: 1.1em;">Ուղարկել պատվերը</button>
+</form>
+"""
+
+st.markdown(contact_form, unsafe_allow_html=True)
