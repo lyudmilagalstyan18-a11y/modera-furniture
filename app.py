@@ -36,52 +36,32 @@ def add_custom_design(image_file):
         height: 3em;
         font-size: 1.2em;
     }}
-    .model-label {{
-        text-align: center;
-        font-weight: bold;
-        color: #8d6e63;
-        margin-top: -10px;
-        margin-bottom: 20px;
-        background: #fdf5e6;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #e2d1c3;
-    }}
     </style>
     """, unsafe_allow_html=True)
 
 add_custom_design('images/logo.jpg')
 
 # --- ԼՈԳՈ ԵՎ ՎԵՐՆԱԳԻՐ ---
-col_l, col_m, col_r = st.columns([1, 1, 1])
-with col_m:
-    try:
-        st.image("images/logo.jpg", use_container_width=True)
-    except:
-        st.markdown("<h3 style='text-align: center;'>MODERA</h3>", unsafe_allow_html=True)
-
 st.markdown("<h1 style='text-align: center;'>Modera Furniture</h1>", unsafe_allow_html=True)
 st.write("---")
 
 # --- ՄԵՐ ՄԱՍԻՆ ---
 st.header("✨ Մեր մասին")
-st.markdown("<p style='font-size: 1.1em;'>Modera Furniture-ը մասնագիտացված է բարձրակարգ կահույքի նախագծման և արտադրության մեջ։</p>", unsafe_allow_html=True)
+st.write("Modera Furniture-ը մասնագիտացված է բարձրակարգ կահույքի նախագծման մեջ։")
 st.write("---")
 
 # --- ՏԵՍԱԿԱՆԻ ---
 st.header("🛋️ Մեր Տեսականին")
-category = st.selectbox("Ընտրեք բաժինը", ["--- Ընտրել բաժինը ---", "Աթոռներ", "Բազմոցներ", "Մահճակալներ", "Պահարաններ"])
+category = st.selectbox("Ընտրեք բաժինը", ["Աթոռներ", "Բազմոցներ", "Մահճակալներ", "Պահարաններ"])
 
 def display_images(image_list):
-    cols = st.columns(3)
+    cols = st.columns(2)
     for index, img_name in enumerate(image_list):
-        with cols[index % 3]:
+        with cols[index % 2]:
             try:
-                st.image(f"images/{{img_name}}", use_container_width=True)
-                m_name = img_name.split('.')[0]
-                st.markdown(f"<div class='model-label'>Մոդել: {{m_name}}</div>", unsafe_allow_html=True)
+                st.image(f"images/{img_name}", use_container_width=True)
             except:
-                st.caption("Նկարը բացակայում է")
+                st.write("Նկարը բեռնվում է...")
 
 if category == "Աթոռներ":
     display_images(["ator.jpg", "ator1.jpg", "ator2.jpg", "ator3.jpg", "ator4.jpg", "ator5.jpg"])
@@ -96,11 +76,17 @@ st.write("---")
 
 # --- ՊԱՏՎԵՐ (Իրական ուղարկումով) ---
 st.header("📅 Պատվիրել")
-st.markdown("<p style='font-size: 0.9em; color: gray;'>Լրացրեք տվյալները, և մենք կկապնվենք Ձեզ հետ:</p>", unsafe_allow_html=True)
 
 contact_form = """
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
-     <input type="hidden" name="_next" value="https://modera-furniture.streamlit.app/">
-     <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
-     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
-     <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+     <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+     <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; width: 100%; border: none; border-radius: 5px; cursor: pointer;">Ուղարկել հայտը</button>
+</form>
+"""
+st.markdown(contact_form, unsafe_allow_html=True)
+
+st.write("---")
+st.write("© 2026 Modera Furniture")
