@@ -97,18 +97,13 @@ st.write("---")
 
 # --- ՊԱՏՎԵՐ ---
 st.header("📅 Պատվիրել")
-with st.form("order_form"):
-    c1, c2 = st.columns(2)
-    with c1:
-        u_name = st.text_input("Ձեր անունը")
-        u_phone = st.text_input("Հեռախոսահամար")
-        u_date = st.date_input("Նախընտրելի ժամկետ", min_value=date.today())
-    with c2:
-        model_ref = st.text_input("Մոդելի անվանումը")
-        u_file = st.file_uploader("Կցեք նկարը", type=['jpg', 'png'])
-    u_notes = st.text_area("Լրացուցիչ նշումներ")
-    if st.form_submit_button("Ուղարկել հայտը"):
-        st.success("Հայտը ուղարկված է:")
-
-st.write("---")
-st.markdown("<p style='text-align: center;'>© 2026 Modera Furniture Manufacturing</p>", unsafe_allow_html=True)
+contact_form = """
+<form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
+     <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+     <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; cursor: pointer; font-weight: bold;">Ուղարկել հայտը</button>
+</form>
+"""
+st.markdown(contact_form, unsafe_allow_html=True)
