@@ -77,12 +77,12 @@ st.write("---")
 # --- ՊԱՏՎԵՐ ---
 st.header("📅 Պատվիրել")
 
-contact_form = """
+contact_form = f"""
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
      <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
      <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
      <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
-     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%;">Ուղարկել հայտը</button>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; cursor: pointer;">Ուղարկել հայտը</button>
 </form>
 """
 st.markdown(contact_form, unsafe_allow_html=True)
