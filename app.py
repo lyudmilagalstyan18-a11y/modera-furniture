@@ -61,7 +61,7 @@ def display_images(image_list):
             try:
                 st.image(f"images/{img_name}", use_container_width=True)
             except:
-                st.write("Նկարը բեռնվում է...")
+                st.write("Նկարը չկա")
 
 if category == "Աթոռներ":
     display_images(["ator.jpg", "ator1.jpg", "ator2.jpg", "ator3.jpg", "ator4.jpg", "ator5.jpg"])
@@ -74,16 +74,15 @@ elif category == "Պահարաններ":
 
 st.write("---")
 
-# --- ՊԱՏՎԵՐ (Իրական ուղարկումով) ---
+# --- ՊԱՏՎԵՐ ---
 st.header("📅 Պատվիրել")
 
 contact_form = """
 <form action="https://formsubmit.co/lyudmilagalstyan.18@gmail.com" method="POST">
      <input type="text" name="name" placeholder="Ձեր անունը" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
      <input type="email" name="email" placeholder="Ձեր էլ. հասցեն" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
-     <input type="text" name="phone" placeholder="Հեռախոսահամար" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
      <textarea name="message" placeholder="Ինչ մոդել եք ցանկանում" style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
-     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; width: 100%; border: none; border-radius: 5px; cursor: pointer;">Ուղարկել հայտը</button>
+     <button type="submit" style="background-color: #5d4037; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%;">Ուղարկել հայտը</button>
 </form>
 """
 st.markdown(contact_form, unsafe_allow_html=True)
